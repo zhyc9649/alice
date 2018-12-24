@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <title>Dynamic Duplex for 5G </title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,600,400' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lora:400,400italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <link rel="shortcut icon" type="image/png" href="images/logo-tab.png" width="auto" height="auto"/>
+
+        <link rel="dns-prefetch" href="//cdn.mathjax.org" />
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+            <!--[if IE]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--This HTML was auto-generated from MATLAB code.To make changes, update the MATLAB code and republish this document.-->
+      <style type="text/css">
+
+        pre, code { font-size:14px; }
+        pre.codeinput {   height:580px;padding:10px; border:1px solid #d3d3d3; background:#f7f7f7;}
+        @media print { pre.codeinput { word-wrap:break-word; width:100%; } }
+        span.keyword { color:#0000FF }
+        span.comment { color:#228B22 }
+        span.string { color:#A020F0 }
+
+    </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script src="js/lazyload.min.js"></script>
+        <script src="js/jquery.animsition.min.js"></script>
+
+</head>
+
+    <body class="animsition">
+        <header class="project-page">
+          
+            <div id = "project-header">
+                <a class="nav-words" href="index.html">HOME</a>
+            </div>
+        </header>
+
+        <footer id="about-me">
+            <div class="container">      
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3" align="center">
+                        <img id="project-logo" src="images/5G/logo.png" alt="logo" height="auto" width="180" >
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-9">
+                        <div class="project-title"> Dynamic Duplex for 5G </div>
+                        <div class="project-subtitle">Solutions for current growing service needs and asymmetric data traffic</div>
+                    </div>
+
+                </div>
+
+            <div id="split-line">
+                    <img id="line-image" src="images/split-line.png">
+            <div>  
+
+            </div>
+        </footer>
+
+        <section class="project-detail">
+            <div class="container">
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+
+                      	<br/><br/>
+
+                        <p class="regular"> This project is aimed to improve throughtput in telecommunication system. Under Pro. Wang's guidance, I worked out three flexible duplex techniques: <font style="font-weight: 400;">dynamic TDD (Time Division Duplex), dynamic FDD (Frequency Division Duplex)</font>, and <font style="font-weight: 400;">dynamic FDD together with dynamic TDD</font>.</p>
+
+                        <p class="regular">
+                         Although these techniques improve the average cell throughput remarkably, there is severe <font style="font-weight: 400;">Cross-link interference</font> among adjacent cells. So I also proposed <font style="font-weight: 400;">Cell Clustering </font>to reduce interfaces among cells.</p>
+
+                        <h2>1. Background</h2>
+                        <h3>1.1 Asymmetric Data Traffic </h3>
+                        <p class="regular">
+                          Different from traditional voice services with similar uplink and downlink traffic, data services tend to have downlink data traffic much larger than uplink. So the fixed, identical uplink and downlink resource configuration cannot meet this requirements.</p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+                        <img class="img-responsive" data-original="images/5G/downlink.png">
+                        <div class="side-note">
+                            <p>Downlink Service Traffic</p>
+                        </div>
+                    </div>
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-0">
+                        <img class="img-responsive" data-original="images/5G/uplink.png">
+                        <div class="side-note">
+                            <p>Uplink Service Traffic</p>
+                        </div>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <h3>1.2 Low Efficiency of Wireless Spectrum Utilization </h3>
+                        <h3>1.3 Traditional Macro Cellular Homogeneous Network transforms to Heterogeneous Networks </h3>
+                        
+                    </div>
+
+					<div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <h2>2. Dynamic TDD</h2>
+                        <h3>2.1 Technical Principle </h3>
+					</div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+                        <img class="img-responsive" data-original="images/5G/frame.png">
+                        <div class="side-note">
+                            <p>5G Wireless Frame</p>
+                        </div>
+                        <img class="img-responsive" data-original="images/5G/subframe.png">
+                        <div class="side-note">
+                            <p>Different Configurations of Frame</p>
+                        </div>
+                    </div>
+					
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-5 col-md-offset-0">
+                        <p class="regular"><br/>
+                          In a time division system, we use “frame” to transport information. A frame has ten subframes and each subframe is 1ms.</p>
+                        <p class="regular">
+                        There are three types of subframes: Uplink / Downlink / Special frame. We put there subframes in the frame. There are many ways to do it. On the left hand there are five typical ways of configuration.</p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-12 col-md-offset-0">
+                        <p class="regular"><br/></p>
+                    </div>
+                    
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+                        <p class="regular">
+                            <br/>
+                          Static TDD means Picos use a certain frame to communicate with users all the time.</p>
+                        <p class="regular">
+                        Dynamic TDD means Picos change their frame periodically according to real-time data of the uplink and downlink or something.</p>
+                    </div>
+					
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-5 col-md-offset-0">
+                        <img class="img-responsive" data-original="images/5G/tdd.png">
+                        <div class="side-note">
+                            <p>Time Division Duplex</p>
+                        </div>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <p class="regular">
+                        <br/>In this project, Picos choose frame according to:</p>
+                        <p class="regular">
+                            $$  N_{DL} = 10\lfloor{\sum\limits_{i=1}^{N_{UE,DL}} Q_{DL,i}(t) \over \sum\limits_{i=1}^{N_{UE,DL}} Q_{DL,i}(t) + \sum\limits_{i=1}^{N_{UE,UL}} Q_{UL,i}(t)}\rfloor$$
+                            $$  N_{UL} = 10 - N_{DL}$$
+                            $  N_{UL} $ is the number of uplink subframe in the frame and $ N_{DL} $ is the downlink one in the same frame.<br/>
+                            $  Q_{uL,i} $ is the uplink buffer queue size of the $ i $ th user and $Q_{DL,i} $ is the downlink one.<br/>
+                            $  N_{UE,UL} $ is the the number of uplink users and $ N_{UE,DL} $ the downlink users.
+                        </p>
+                    </div>
+                    
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <h3>2.2  Matlab Codes </h3>
+                        <div class="tabs">
+          <input type="radio" id="tab1" name="tab-control" checked>
+          <input type="radio" id="tab2" name="tab-control">
+          <input type="radio" id="tab3" name="tab-control">  
+          <ul>
+            <li title="Main"><label for="tab1" role="button"><br><span>Main</span></label></li>
+            <li title="TDD Reconfig"><label for="tab2" role="button"><br><span>TDD Reconfig </span></label></li>
+            <li title="FIFO Schedule"><label for="tab3" role="button"><br><span>FIFO</span></label></li>   
+          </ul>
+          
+          <div class="slider"><div class="indicator"></div></div>
+          <div class="content">
+            <section>
+                <div class="content" >
+                    <pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+<span class="keyword">if</span> exist(<span class="string">'medium_result.mat'</span>, <span class="string">'file'</span>)
+    delete(<span class="string">'medium_result.mat'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span> exist(<span class="string">'final_result.mat'</span>, <span class="string">'file'</span>)
+    delete(<span class="string">'final_result.mat'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span> exist(<span class="string">'program_running_info.txt'</span>, <span class="string">'file'</span>)
+    delete(<span class="string">'program_running_info.txt'</span>);
+<span class="keyword">end</span>
+
+diary(<span class="string">'program_running_info.txt'</span>);
+diary <span class="string">on</span>;
+
+tic
+
+<span class="comment">%-----------------------------global classes-------------------------------</span>
+<span class="keyword">global</span> total_Macro;
+<span class="keyword">global</span> total_Pico;
+
+<span class="comment">%----------------------set all parameters----------------------------------</span>
+set_variables;   <span class="comment">% set the parameters corresponding to different simulation cases</span>
+set_parameters;  <span class="comment">% set other parameters</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+
+randn(<span class="string">'seed'</span>,82861501);
+rand(<span class="string">'seed'</span>, 8286811);
+
+UE_rand_seed   = round(1000000.*rand(1,1000));
+Pico_rand_seed = round(1000000.*rand(1,1000));
+CH_rand_seed   = round(1000000.*rand(1,1000));
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+init_final_results;
+
+<span class="comment">%=======================load channel data==================================</span>
+<span class="keyword">if</span> channel_model==1  <span class="comment">% for using TU6 channel</span>
+    <span class="keyword">global</span> total_TU6_channel;
+    load(<span class="string">'total_TU6_channel.mat'</span>);
+    total_TU6_channel = reshape(total_TU6_channel(:, 1:96), 50000, 2, 48);
+    total_TU6_channel = squeeze(total_TU6_channel(:,1,:));
+<span class="keyword">end</span>
+<span class="comment">%--------------------------------------------------------------------------</span>
+
+<span class="keyword">for</span> drop_index=1:drop_num
+    output_program_running_info;
+
+    <span class="comment">%---------------initialization at the beginning of each drop-----------</span>
+    TTI_index=0;
+    init_global_class_at_eachDrop(total_Macro_num, total_Pico_num,<span class="keyword">...</span>
+    total_UE_num, TTI_num_per_frame,UE_noise_power_per_sc_db, Pico_noise_power_per_sc_db)
+
+    used_rand_seed = CH_rand_seed(drop_index);  <span class="comment">%use the same rand seed</span>
+    rand(<span class="string">'seed'</span>,used_rand_seed);
+    <span class="comment">%--------------------------------drop Pico-----------------------------</span>
+    used_rand_seed = Pico_rand_seed(drop_index);  <span class="comment">%use the same rand seed</span>
+    rand(<span class="string">'seed'</span>,used_rand_seed);
+
+    Pico_pos_matrix = Pico_dropping(MeNB_pos, wrap_around_MeNB_pos, <span class="keyword">...</span>
+    total_Macro_num, total_MeNB_num, total_Pico_num, Macro_num_per_MeNB, Pico_num_per_Macro,<span class="keyword">...</span>
+    ISD, Macro_antenna_gain, Pico_antenna_gain, Pico_deployment, Pico_penetration_loss);
+
+    Pico_TX_power_per_sc_db = Pico_PC(total_Pico_num, max_Pico_TX_power_per_sc_db);
+
+    <span class="comment">%-------------------------------drop UE--------------------------------</span>
+    used_rand_seed = UE_rand_seed(drop_index);  <span class="comment">%use the same rand seed</span>
+    rand(<span class="string">'seed'</span>,used_rand_seed);
+
+    UE_pos_matrix = UE_dropping(total_MeNB_num, total_Macro_num, Macro_num_per_MeNB,<span class="keyword">...</span>
+    Pico_num_per_Macro, average_UE_num_per_Macro, average_UE_num_per_Pico, total_UE_num,<span class="keyword">...</span>
+    total_Pico_num, MeNB_pos, wrap_around_MeNB_pos, Pico_pos_matrix, cell_radius,<span class="keyword">...</span>
+    Macro_antenna_gain, Pico_antenna_gain, UE_antenna_gain, UE_penetration_loss,<span class="keyword">...</span>
+    Macro_TX_power_per_sc_db, Pico_TX_power_per_sc_db);
+
+    Cal_geometry_SINR_for_UE(total_Macro_num, total_Pico_num, total_UE_num,<span class="keyword">...</span>
+    UE_noise_power_per_sc, Macro_TX_power_per_sc_db, Pico_TX_power_per_sc_db,<span class="keyword">...</span>
+    enable_Macro_flag);
+    <span class="comment">%---------------------start transmission in each TTI-------------------</span>
+    <span class="keyword">for</span> TTI_index = 1:TTI_num
+        <span class="keyword">if</span> mod(TTI_index, 100)==1
+            fprintf(1,<span class="string">'the current TTI index is %-dth \n'</span>, TTI_index);
+        <span class="keyword">end</span>
+        <span class="comment">%***************************UL/DL****************************</span>
+        current_Macro_TTI_direction = ones(1, total_Macro_num);   <span class="comment">% downlink</span>
+        current_Pico_TTI_direction  = ones(1, total_Pico_num);
+
+        <span class="comment">%----------------calculate TDD mode------------------------</span>
+        SF_index = mod(TTI_index-1, TTI_num_per_frame) + 1;  <span class="comment">% range of SF_index: 1 ~ 10</span>
+        <span class="keyword">if</span> mod(TTI_index, reconfig_period)==1
+            TDD_reconfig(TTI_index,Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S,<span class="keyword">...</span>
+            TDD_reconfig_period,Macro_eff_RE_per_subband_U, total_Macro_num, total_Pico_num, enable_Macro_flag,<span class="keyword">...</span>
+            enable_dynamic_TDD,current_Pico_TTI_direction);
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> enable_Macro_flag==1
+            <span class="keyword">for</span> Macro_index=1:total_Macro_num
+                current_Macro_TTI_direction(Macro_index) = total_Macro.Macro(Macro_index).TDD_mode(SF_index);
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> total_Pico_num&gt;0
+            <span class="keyword">for</span> Pico_index=1:total_Pico_num
+                current_Pico_TTI_direction(Pico_index) = total_Pico.Pico(Pico_index).TDD_mode(SF_index);
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">%----------------reduce interference------------------------</span>
+        <span class="comment">%UE_PC fixed subframes and flexible subframes</span>
+        <span class="keyword">if</span> F_F_CONTROL == 0
+        UE_PC(max_UE_TX_power, P0, alpha, RB_num_per_subband);
+        <span class="keyword">else</span>
+        UE_INO_Control(max_UE_TX_power, P0, alpha, RB_num_per_subband,TTI_index,total_UE_num,TTI_num_per_frame,P0_add,<span class="keyword">...</span>
+                       current_Pico_TTI_direction);
+        <span class="keyword">end</span>
+
+        <span class="comment">%----------------generate DL &amp; UL traffic------------------------</span>
+        Gen_traffic(total_Macro_num, total_Pico_num, total_UE_num,<span class="keyword">...</span>
+        Macro_DL_traffic_lamda, Macro_UL_traffic_lamda, Pico_DL_traffic_lamda,<span class="keyword">...</span>
+        Pico_UL_traffic_lamda, enable_Macro_flag, TTI_index, SF_index, traffic_pkt_size);
+
+        <span class="comment">%---------------load channel information in each TTI-------------</span>
+        <span class="keyword">if</span> channel_model==1  <span class="comment">% load TU6 channel data, to be completed</span>
+            load_TU6_channel_data();
+        <span class="keyword">end</span>
+
+        <span class="comment">%-----------------calculate CQI for each UE-----------------------</span>
+        Store_UE_CSI(total_UE_num, TTI_index,Macro_TX_power_per_sc_db,Pico_TX_power_per_sc_db,<span class="keyword">...</span>
+         current_Macro_TTI_direction, current_Pico_TTI_direction);
+
+        <span class="comment">%------------perform FIFO scheduling for Macro &amp; Pico------------</span>
+        AllMacro_scheduling_flag = zeros(total_Macro_num, 12);
+        AllMacro_TP_index = zeros(total_Macro_num, 12);
+        <span class="keyword">if</span> enable_Macro_flag==1            <span class="comment">%With macro-layer</span>
+            <span class="keyword">for</span> Macro_index=1:total_Macro_num
+                subband_num=fix(total_Macro.Macro(Macro_index).subband_num);
+                TTI_direction = current_Macro_TTI_direction(Macro_index);
+                [scheduling_flag, TP_index] = FIFO_scheduling(0, Macro_index, TTI_index, <span class="keyword">...</span>
+                TTI_direction, DL_HARQ_delay, UL_HARQ_delay, subband_num, total_UE_num,<span class="keyword">...</span>
+                Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S, Macro_eff_RE_per_subband_U,<span class="keyword">...</span>
+                Pico_eff_RE_per_subband_D, Pico_eff_RE_per_subband_S, Pico_eff_RE_per_subband_U);
+                AllMacro_scheduling_flag(Macro_index, :) = [scheduling_flag,zeros(1,12-length(scheduling_flag))];
+                AllMacro_TP_index(Macro_index, :) = [TP_index,zeros(1,12-length(TP_index))];
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        AllPico_scheduling_flag = zeros(total_Pico_num, 24);
+        AllPico_TP_index = zeros(total_Pico_num, 24);
+        <span class="keyword">if</span> total_Pico_num&gt;0
+            <span class="keyword">for</span> Pico_index=1:total_Pico_num
+                subband_num=fix(total_Pico.Pico(Pico_index).subband_num);
+                TTI_direction = current_Pico_TTI_direction(Pico_index);
+                [scheduling_flag, TP_index] = FIFO_scheduling(1, Pico_index, TTI_index, <span class="keyword">...</span>
+                TTI_direction, DL_HARQ_delay, UL_HARQ_delay, subband_num, total_UE_num,<span class="keyword">...</span>
+                Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S, Macro_eff_RE_per_subband_U,<span class="keyword">...</span>
+                Pico_eff_RE_per_subband_D, Pico_eff_RE_per_subband_S, Pico_eff_RE_per_subband_U);
+                AllPico_scheduling_flag(Pico_index, :) = [scheduling_flag,zeros(1,24-length(scheduling_flag))];
+                AllPico_TP_index(Pico_index, :) = [TP_index,zeros(1,24-length(TP_index))];
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">%-------------calculate interference for each UE----------------</span>
+        Cal_IN0_for_UE(TTI_index, total_UE_num, total_Macro_num, <span class="keyword">...</span>
+        total_Pico_num, intf_T_window, enable_Macro_flag, AllMacro_TP_index, AllPico_TP_index,<span class="keyword">...</span>
+        Macro_TX_power_per_sc_db, Pico_TX_power_per_sc_db, current_Macro_TTI_direction, <span class="keyword">...</span>
+        current_Pico_TTI_direction, UE_noise_power_per_sc, Pico_noise_power_per_sc,<span class="keyword">...</span>
+        Macro_noise_power_per_sc);
+
+        <span class="comment">%-------------decode data for each scheduled UE-----------------</span>
+        UE_decoding_data(total_Pico_num, total_Macro_num,<span class="keyword">...</span>
+        TTI_index, traffic_pkt_size, enable_Macro_flag, start_collect_TTI_index, <span class="keyword">...</span>
+        Macro_TX_power_per_sc_db, Pico_TX_power_per_sc_db, <span class="keyword">...</span>
+        AllMacro_scheduling_flag, AllPico_scheduling_flag,<span class="keyword">...</span>
+        current_Macro_TTI_direction, current_Pico_TTI_direction);
+
+    <span class="keyword">end</span> <span class="comment">% end "for TTI_index = 1:TTI_num"</span>
+
+    fprintf(1,<span class="string">'-----------the total using time until current drop------------------ \n'</span>);
+    toc
+    save_middle_results;
+<span class="keyword">end</span>  <span class="comment">% end "for drop_index=1:drop_num"</span>
+<span class="comment">%-------------------------------------------------------------------------------------------------</span>
+fprintf(1,<span class="string">'-------------------------------------------------------------------------- \n'</span>);
+
+diary <span class="string">off</span>;
+
+draw_simulation_figures;
+
+<span class="comment">%==================after final_result is saved, delete medium_result==================</span>
+<span class="keyword">if</span> exist(<span class="string">'medium_result.mat'</span>, <span class="string">'file'</span>)
+    delete(<span class="string">'medium_result.mat'</span>);
+<span class="keyword">end</span> 
+</pre>
+</div>
+</section>
+                
+
+
+
+
+
+
+                <section>
+                  
+                 <pre class="codeinput"><span class="keyword">function</span>  [] = TDD_reconfig(TTI_index,Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S,<span class="keyword">...</span>
+TDD_reconfig_period,Macro_eff_RE_per_subband_U, total_Macro_num, total_Pico_num, enable_Macro_flag, <span class="keyword">...</span>
+enable_dynamic_TDD, pico_group_index);
+
+<span class="keyword">global</span> total_Macro;
+<span class="keyword">global</span> total_Pico;
+<span class="keyword">global</span> term_DL_throughput;
+<span class="keyword">global</span> term_UL_throughput;
+
+<span class="comment">% 1: DL;    0: Speical subframe;    -1: UL</span>
+TDD_mode = [
+1 0 -1 -1 -1  1 0 -1 -1 -1;
+1 0 -1 -1  1  1 0 -1 -1  1;
+1 0 -1  1  1  1 0 -1  1  1;
+1 0 -1 -1 -1  1 1  1  1  1;
+1 0 -1 -1  1  1 1  1  1  1;
+1 0 -1  1  1  1 1  1  1  1;
+1 0 -1 -1 -1  1 0 -1 -1  1];
+
+DL_UL_ratio = [
+(Macro_eff_RE_per_subband_D.*2+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*6);
+(Macro_eff_RE_per_subband_D.*4+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*4);
+(Macro_eff_RE_per_subband_D.*6+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*2);
+(Macro_eff_RE_per_subband_D.*6+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*3);
+(Macro_eff_RE_per_subband_D.*7+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*2);
+(Macro_eff_RE_per_subband_D.*8+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*1);
+(Macro_eff_RE_per_subband_D.*3+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*5)];
+
+<span class="keyword">if</span> enable_Macro_flag==1
+    <span class="keyword">for</span> Macro_index=1:total_Macro_num
+        total_Macro.Macro(Macro_index).TDD_mode = TDD_mode(2,:);<span class="comment">%Macro use frame of mode_2</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> total_Pico_num&gt;0
+     <span class="comment">%----------------fixed TDD ,algorithm 0---------------</span>
+    <span class="keyword">if</span> enable_dynamic_TDD==0
+        <span class="keyword">for</span> Pico_index=1:total_Pico_num
+            total_Pico.Pico(Pico_index).TDD_mode = TDD_mode(2,:);
+        <span class="keyword">end</span>
+     <span class="comment">%----------------dynamic TDD ,algorithm 1 ,without pico grouping------</span>
+    <span class="keyword">elseif</span> enable_dynamic_TDD==1
+        <span class="keyword">for</span> Pico_index=1:total_Pico_num
+            DL_traffic = 0;
+            <span class="comment">%----------------accumulate DL traffic-------------------------</span>
+            buf_pkt_num = total_Pico.Pico(Pico_index).DL_buffer.pkt_num;
+            <span class="keyword">if</span> buf_pkt_num&gt;0
+                <span class="keyword">for</span> n=1:buf_pkt_num
+                    finished_flag = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).finished_flag;
+                    buf_pkt_size  = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).buf_pkt_size;
+                    <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                        error(<span class="string">'wrong DL buffer packet size'</span>);
+                    <span class="keyword">end</span>
+                    DL_traffic = DL_traffic + buf_pkt_size;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            DL_HARQ_num = total_Pico.Pico(Pico_index).DL_HARQ_num;
+            <span class="keyword">if</span> DL_HARQ_num&gt;0
+                <span class="keyword">for</span> n=1:DL_HARQ_num
+                    HARQ_thr = total_Pico.Pico(Pico_index).DL_HARQ_info(n).HARQ_thr;
+                    <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                        error(<span class="string">'wrong DL HARQ packet size'</span>);
+                    <span class="keyword">end</span>
+                    DL_traffic = DL_traffic + HARQ_thr;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            <span class="comment">%----------------accumulate UL traffic-------------------------</span>
+            UL_traffic = 0;
+            buf_pkt_num = total_Pico.Pico(Pico_index).UL_buffer.pkt_num;
+            <span class="keyword">if</span> buf_pkt_num&gt;0
+                <span class="keyword">for</span> n=1:buf_pkt_num
+                    finished_flag = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).finished_flag;
+                    buf_pkt_size  = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).buf_pkt_size;
+                    <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                        error(<span class="string">'wrong UL buffer packet size'</span>);
+                    <span class="keyword">end</span>
+                    UL_traffic = UL_traffic + buf_pkt_size;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            UL_HARQ_num = total_Pico.Pico(Pico_index).UL_HARQ_num;
+            <span class="keyword">if</span> UL_HARQ_num&gt;0
+                <span class="keyword">for</span> n=1:UL_HARQ_num
+                    HARQ_thr = total_Pico.Pico(Pico_index).UL_HARQ_info(n).HARQ_thr;
+                    <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                        error(<span class="string">'wrong UL HARQ packet size'</span>);
+                    <span class="keyword">end</span>
+                    UL_traffic = UL_traffic + HARQ_thr;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> DL_traffic==0
+                TDD_mode_index = 1;
+            <span class="keyword">elseif</span> UL_traffic==0
+                TDD_mode_index = 6;
+            <span class="keyword">else</span>
+                traffic_DL_UL_ratio = DL_traffic./UL_traffic;
+                diff = abs(DL_UL_ratio - traffic_DL_UL_ratio);
+                [t1, TDD_mode_index] = min(diff);
+            <span class="keyword">end</span>
+
+            total_Pico.Pico(Pico_index).TDD_mode = TDD_mode(TDD_mode_index, :);
+        <span class="keyword">end</span>
+
+    <span class="comment">%----------------dynamic TDD ,algorithm 1 ,with pico grouping---------------</span>
+    <span class="keyword">elseif</span> enable_dynamic_TDD==2
+        pico_group_num = max(pico_group_index);
+        <span class="keyword">for</span> m = 1:pico_group_num
+            t1_pico_index = find(pico_group_index==m);
+            DL_traffic = 0;
+            UL_traffic = 0;
+            <span class="keyword">for</span> m1 = 1:length(t1_pico_index)
+                Pico_index = t1_pico_index(m1);
+                buf_pkt_num = total_Pico.Pico(Pico_index).DL_buffer.pkt_num;
+                <span class="keyword">if</span> buf_pkt_num&gt;0
+                    <span class="keyword">for</span> n=1:buf_pkt_num
+                        finished_flag = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).finished_flag;
+                        buf_pkt_size  = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).buf_pkt_size;
+                        <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                            error(<span class="string">'wrong DL buffer packet size'</span>);
+                        <span class="keyword">end</span>
+                        DL_traffic = DL_traffic + buf_pkt_size;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+                DL_HARQ_num = total_Pico.Pico(Pico_index).DL_HARQ_num;
+                <span class="keyword">if</span> DL_HARQ_num&gt;0
+                    <span class="keyword">for</span> n=1:DL_HARQ_num
+                        HARQ_thr = total_Pico.Pico(Pico_index).DL_HARQ_info(n).HARQ_thr;
+                        <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                            error(<span class="string">'wrong DL HARQ packet size'</span>);
+                        <span class="keyword">end</span>
+                        DL_traffic = DL_traffic + HARQ_thr;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+
+                buf_pkt_num = total_Pico.Pico(Pico_index).UL_buffer.pkt_num;
+                <span class="keyword">if</span> buf_pkt_num&gt;0
+                    <span class="keyword">for</span> n=1:buf_pkt_num
+                        finished_flag = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).finished_flag;
+                        buf_pkt_size  = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).buf_pkt_size;
+                        <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                            error(<span class="string">'wrong UL buffer packet size'</span>);
+                        <span class="keyword">end</span>
+                        UL_traffic = UL_traffic + buf_pkt_size;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+                UL_HARQ_num = total_Pico.Pico(Pico_index).UL_HARQ_num;
+                <span class="keyword">if</span> UL_HARQ_num&gt;0
+                    <span class="keyword">for</span> n=1:UL_HARQ_num
+                        HARQ_thr = total_Pico.Pico(Pico_index).UL_HARQ_info(n).HARQ_thr;
+                        <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                            error(<span class="string">'wrong UL HARQ packet size'</span>);
+                        <span class="keyword">end</span>
+                        UL_traffic = UL_traffic + HARQ_thr;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> DL_traffic==0
+                TDD_mode_index = 1;
+            <span class="keyword">elseif</span> UL_traffic==0
+                TDD_mode_index = 6;
+            <span class="keyword">else</span>
+                traffic_DL_UL_ratio = DL_traffic./UL_traffic;
+                diff = abs(DL_UL_ratio - traffic_DL_UL_ratio);
+                [t1, TDD_mode_index] = min(diff);
+            <span class="keyword">end</span>
+            <span class="keyword">for</span> m1 = 1:length(t1_pico_index)
+                Pico_index = t1_pico_index(m1);
+                total_Pico.Pico(Pico_index).TDD_mode = TDD_mode(TDD_mode_index, :);
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre></section>
+
+
+
+
+
+
+                <section>
+                 
+                 <pre class="codeinput"><span class="keyword">function</span> [scheduling_flag, TP_index] = FIFO_scheduling(Macro_Pico_flag, Node_index, <span class="keyword">...</span>
+TTI_index, TTI_direction, DL_HARQ_delay, UL_HARQ_delay, subband_num, total_UE_num,<span class="keyword">...</span>
+Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S, Macro_eff_RE_per_subband_U,<span class="keyword">...</span>
+Pico_eff_RE_per_subband_D, Pico_eff_RE_per_subband_S, Pico_eff_RE_per_subband_U,<span class="keyword">...</span>
+SF_index, enable_dynamic_TDD)
+
+
+<span class="comment">% scheduling_flag: 1 * subband_num</span>
+<span class="comment">% TP_index: 1*subband_num</span>
+
+
+<span class="keyword">global</span> total_Macro;
+<span class="keyword">global</span> total_Pico;
+<span class="keyword">global</span> total_UE;
+
+n = Node_index;
+
+<span class="keyword">if</span> Macro_Pico_flag == 0  <span class="comment">% Macro scheduling</span>
+    serving_UE_index = total_Macro.Macro(n).serving_UE_index;
+<span class="keyword">else</span>
+    serving_UE_index = total_Pico.Pico(n).serving_UE_index;
+<span class="keyword">end</span>
+
+<span class="comment">%-----------------initialization-----------------------</span>
+<span class="keyword">for</span> n1=1:length(serving_UE_index)
+    UE_index = serving_UE_index(n1);
+    total_UE.UE(UE_index).SINR_gain_from_HARQ = -inf;
+    total_UE.UE(UE_index).valid_MCS = 1;
+    total_UE.UE(UE_index).TX_buf_pkt_index = [];
+    total_UE.valid_scheduled_flag(UE_index) = 0;
+    total_UE.valid_thr(UE_index) = 0;
+<span class="keyword">end</span>
+<span class="comment">%------------------------------------------------------</span>
+<span class="keyword">if</span> subband_num==1
+subband_available_flag = 1;
+scheduling_flag = 0;
+TP_index = 0;
+<span class="keyword">else</span>
+subband_available_flag = ones(1, subband_num);
+scheduling_flag = zeros(1, subband_num);
+TP_index = zeros(1, subband_num);
+<span class="keyword">end</span>
+<span class="keyword">if</span> TTI_direction~=-1  <span class="comment">% DL or special subframe, perform DL scheduling</span>
+    <span class="keyword">if</span> Macro_Pico_flag == 0 <span class="comment">% Macro scheduling</span>
+        <span class="comment">%---------------first schedule packet in HARQ buffer---------------</span>
+        DL_HARQ_num = total_Macro.Macro(n).DL_HARQ_num;
+        scheduled_HARQ_UE_index = [];
+        <span class="keyword">if</span> DL_HARQ_num&gt;0
+            temp_index = [];
+            <span class="keyword">for</span> n1=1:DL_HARQ_num
+                <span class="keyword">if</span> all(subband_available_flag==0)   <span class="comment">% without free subband resource</span>
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                HARQ_TTI_index = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_TTI_index;
+                <span class="keyword">if</span> (TTI_index-HARQ_TTI_index)&lt;DL_HARQ_delay
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                i = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_UE_index;
+                <span class="keyword">if</span> ~isempty(find(scheduling_flag==i))  <span class="comment">% this UE is already scheduled</span>
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                HARQ_subband_index = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_subband_index;
+                HARQ_subband_sum = length(HARQ_subband_index);
+                <span class="keyword">if</span> HARQ_subband_sum&gt;sum(subband_available_flag)
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                available_subband_index = find(subband_available_flag==1);
+                selected_subband_index = available_subband_index(1:HARQ_subband_sum);
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+
+                total_UE.valid_scheduled_flag(i) = 1;
+                total_UE.valid_thr(i) = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_thr;
+
+                total_UE.UE(i).valid_MCS = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_MCS;
+                total_UE.UE(i).TX_buf_pkt_index = total_Macro.Macro(n).DL_HARQ_info(n1).TX_buf_pkt_index;
+                total_UE.UE(i).SINR_gain_from_HARQ = total_Macro.Macro(n).DL_HARQ_info(n1).HARQ_SINR;
+
+                temp_index(end+1) = n1;
+                scheduled_HARQ_UE_index(end+1) = i;
+            <span class="keyword">end</span>
+            <span class="comment">%-----------------delete HARQ information-----------------------</span>
+            total_Macro.Macro(n).DL_HARQ_info(temp_index) = [];
+            total_Macro.Macro(n).DL_HARQ_num = DL_HARQ_num - length(temp_index);
+        <span class="keyword">end</span>
+        <span class="comment">%--------------second schedule packet in normal buffer------------------</span>
+        DL_pkt_num = total_Macro.Macro(n).DL_buffer.pkt_num;
+        UE_scheduled_flag = zeros(1, total_UE_num);
+        <span class="keyword">if</span> DL_pkt_num&gt;0
+            <span class="keyword">for</span> n1=1:DL_pkt_num
+                <span class="keyword">if</span> total_Macro.Macro(n).DL_buffer.pkt_info(n1).finished_flag==0
+                    available_subband_index = find(subband_available_flag==1);
+                    available_subband_num = sum(subband_available_flag);
+                    <span class="keyword">if</span> available_subband_num&lt;=0   <span class="comment">% without free subband resource</span>
+                        <span class="keyword">break</span>;
+                    <span class="keyword">end</span>
+                    i = total_Macro.Macro(n).DL_buffer.pkt_info(n1).allocated_UE_index;
+                    <span class="keyword">if</span> ismember(i, scheduled_HARQ_UE_index)  <span class="comment">% this UE is already scheduled by HARQ</span>
+                        <span class="keyword">continue</span>;
+                    <span class="keyword">end</span>
+                    <span class="keyword">if</span> UE_scheduled_flag(i)==0
+                        temp_CQI = mean(total_UE.UE(i).valid_CQI(available_subband_index));
+                        [temp_sp_ef, temp_MC_index] = DL_SINR2MCS(temp_CQI);
+                        selected_MCS = temp_MC_index;
+                        total_UE.UE(i).valid_MCS = selected_MCS;
+                        UE_scheduled_flag(i) = 1;
+                    <span class="keyword">else</span>
+                        selected_MCS = total_UE.UE(i).valid_MCS;
+                    <span class="keyword">end</span>
+
+                    <span class="keyword">if</span> TTI_direction==1   <span class="comment">% DL subframe</span>
+                        eff_RE_num = Macro_eff_RE_per_subband_D;
+                    <span class="keyword">else</span>
+                        eff_RE_num = Macro_eff_RE_per_subband_S;
+                    <span class="keyword">end</span>
+
+                    buf_pkt_size = total_Macro.Macro(n).DL_buffer.pkt_info(n1).buf_pkt_size;
+                    <span class="keyword">if</span> buf_pkt_size&lt;=1e-6  <span class="comment">% empty packet</span>
+                        error(<span class="string">'the packet should be finished'</span>);
+                    <span class="keyword">end</span>
+                    temp_sp_ef = DL_spectrum_efficiency(selected_MCS);
+                    t_subband_num = ceil(buf_pkt_size./(temp_sp_ef.*eff_RE_num));
+                    selected_subband_num = min([available_subband_num, t_subband_num]);
+                    selected_subband_index = available_subband_index(1:selected_subband_num);
+
+                    valid_thr = temp_sp_ef.*eff_RE_num.*selected_subband_num;
+                    remain_pkt_size = buf_pkt_size - valid_thr;
+                    <span class="keyword">if</span> remain_pkt_size&lt;=1e-6
+                        remain_pkt_size = 0;
+                        total_Macro.Macro(n).DL_buffer.pkt_info(n1).finished_flag = 1;
+                    <span class="keyword">end</span>
+                    total_Macro.Macro(n).DL_buffer.pkt_info(n1).buf_pkt_size = remain_pkt_size;
+
+                    subband_available_flag(selected_subband_index) = 0;
+                    scheduling_flag(selected_subband_index) = i;
+                    TP_index(selected_subband_index) = n;
+
+                    total_UE.valid_thr(i) = total_UE.valid_thr(i) + valid_thr;
+                    total_UE.valid_scheduled_flag(i) = 1;
+
+                    total_UE.UE(i).TX_buf_pkt_index(end+1) = n1;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        total_Macro.used_DL_subframes(n) = total_Macro.used_DL_subframes(n) + 1;
+    <span class="keyword">elseif</span> Macro_Pico_flag == 1  <span class="comment">% Pico scheduling</span>
+        <span class="comment">%---------------first schedule packet in HARQ buffer------------------</span>
+        DL_HARQ_num = total_Pico.Pico(n).DL_HARQ_num;
+        scheduled_HARQ_UE_index = [];
+        <span class="keyword">if</span> DL_HARQ_num&gt;0
+            temp_index = [];
+            <span class="keyword">for</span> n1=1:DL_HARQ_num
+                <span class="keyword">if</span> all(subband_available_flag==0)   <span class="comment">% without free subband resource</span>
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                HARQ_TTI_index = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_TTI_index;
+                <span class="keyword">if</span> (TTI_index-HARQ_TTI_index)&lt;DL_HARQ_delay
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                i = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_UE_index;
+                <span class="keyword">if</span> ~isempty(find(scheduling_flag==i))  <span class="comment">% this UE is already scheduled</span>
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                HARQ_subband_index = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_subband_index;
+                HARQ_subband_sum = length(HARQ_subband_index);
+                <span class="keyword">if</span> HARQ_subband_sum&gt;sum(subband_available_flag)
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                available_subband_index = find(subband_available_flag==1);
+                selected_subband_index = available_subband_index(1:HARQ_subband_sum);
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+
+                total_UE.valid_scheduled_flag(i) = 1;
+                total_UE.valid_thr(i) = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_thr;
+
+                total_UE.UE(i).valid_MCS = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_MCS;
+                total_UE.UE(i).TX_buf_pkt_index = total_Pico.Pico(n).DL_HARQ_info(n1).TX_buf_pkt_index;
+                total_UE.UE(i).SINR_gain_from_HARQ = total_Pico.Pico(n).DL_HARQ_info(n1).HARQ_SINR;
+
+                temp_index(end+1) = n1;
+                scheduled_HARQ_UE_index(end+1) = i;
+            <span class="keyword">end</span>
+            <span class="comment">%-----------------delete HARQ information-----------------------</span>
+            total_Pico.Pico(n).DL_HARQ_info(temp_index) = [];
+            total_Pico.Pico(n).DL_HARQ_num = DL_HARQ_num - length(temp_index);
+        <span class="keyword">end</span>
+        <span class="comment">%--------------second schedule packet in normal buffer------------------</span>
+        DL_pkt_num = total_Pico.Pico(n).DL_buffer.pkt_num;
+        UE_scheduled_flag = zeros(1, total_UE_num);
+        <span class="keyword">if</span> DL_pkt_num&gt;0
+            <span class="keyword">for</span> n1=1:DL_pkt_num
+                <span class="keyword">if</span> total_Pico.Pico(n).DL_buffer.pkt_info(n1).finished_flag==0
+                    available_subband_index = find(subband_available_flag==1);
+                    available_subband_num = sum(subband_available_flag);
+                    <span class="keyword">if</span> available_subband_num&lt;=0   <span class="comment">% without free subband resource</span>
+                        <span class="keyword">break</span>;
+                    <span class="keyword">end</span>
+                    i = total_Pico.Pico(n).DL_buffer.pkt_info(n1).allocated_UE_index;
+                    <span class="keyword">if</span> ismember(i, scheduled_HARQ_UE_index)  <span class="comment">% this UE is already scheduled by HARQ</span>
+                        <span class="keyword">continue</span>;
+                    <span class="keyword">end</span>
+                    <span class="keyword">if</span> UE_scheduled_flag(i)==0
+                        temp_CQI = mean(total_UE.UE(i).valid_CQI(available_subband_index));
+                        [temp_sp_ef, temp_MC_index] = DL_SINR2MCS(temp_CQI);
+                        selected_MCS = temp_MC_index;
+                        total_UE.UE(i).valid_MCS = selected_MCS;
+                        UE_scheduled_flag(i) = 1;
+                    <span class="keyword">else</span>
+                        selected_MCS = total_UE.UE(i).valid_MCS;
+                    <span class="keyword">end</span>
+
+                    <span class="keyword">if</span> TTI_direction==1   <span class="comment">% DL subframe</span>
+                        eff_RE_num = Macro_eff_RE_per_subband_D;
+                    <span class="keyword">else</span>
+                        eff_RE_num = Macro_eff_RE_per_subband_S;
+                    <span class="keyword">end</span>
+
+                    buf_pkt_size = total_Pico.Pico(n).DL_buffer.pkt_info(n1).buf_pkt_size;
+                    <span class="keyword">if</span> buf_pkt_size&lt;=1e-6  <span class="comment">% empty packet</span>
+                        error(<span class="string">'the packet should be finished'</span>);
+                    <span class="keyword">end</span>
+                    temp_sp_ef = DL_spectrum_efficiency(selected_MCS);
+                    t_subband_num = ceil(buf_pkt_size./(temp_sp_ef.*eff_RE_num));
+                    selected_subband_num = min([available_subband_num, t_subband_num]);
+                    selected_subband_index = available_subband_index(1:selected_subband_num);
+
+                    valid_thr = temp_sp_ef.*eff_RE_num.*selected_subband_num;
+                    remain_pkt_size = buf_pkt_size - valid_thr;
+                    <span class="keyword">if</span> remain_pkt_size&lt;=1e-6
+                        remain_pkt_size = 0;
+                        total_Pico.Pico(n).DL_buffer.pkt_info(n1).finished_flag = 1;
+                    <span class="keyword">end</span>
+                    total_Pico.Pico(n).DL_buffer.pkt_info(n1).buf_pkt_size = remain_pkt_size;
+
+                    subband_available_flag(selected_subband_index) = 0;
+                    scheduling_flag(selected_subband_index) = i;
+                    TP_index(selected_subband_index) = n;
+
+                    total_UE.valid_thr(i) = total_UE.valid_thr(i) + valid_thr;
+                    total_UE.valid_scheduled_flag(i) = 1;
+
+                    total_UE.UE(i).TX_buf_pkt_index(end+1) = n1;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        total_Pico.used_DL_subframes(n) = total_Pico.used_DL_subframes(n) + 1;
+    <span class="keyword">end</span>
+<span class="keyword">else</span> <span class="comment">% UL subframe, perform UL scheduling</span>
+    <span class="keyword">if</span> Macro_Pico_flag == 0 <span class="comment">% Macro scheduling</span>
+        UL_HARQ_num = total_Macro.Macro(n).UL_HARQ_num;
+        scheduled_HARQ_UE_index = [];
+        <span class="keyword">if</span> UL_HARQ_num&gt;0
+            temp_index = [];
+            <span class="keyword">for</span> n1=1:UL_HARQ_num
+                <span class="keyword">if</span> all(subband_available_flag==0)   <span class="comment">% without free subband resource</span>
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                HARQ_TTI_index = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_TTI_index;
+                <span class="keyword">if</span> (TTI_index-HARQ_TTI_index)&lt;UL_HARQ_delay
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                i = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_UE_index;
+                <span class="keyword">if</span> ~isempty(find(scheduling_flag==i))  <span class="comment">% this UE is already scheduled</span>
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                HARQ_subband_index = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_subband_index;
+                HARQ_subband_sum = length(HARQ_subband_index);
+                <span class="keyword">if</span> HARQ_subband_sum&gt;sum(subband_available_flag)
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                available_subband_index = find(subband_available_flag==1);
+                selected_subband_index = available_subband_index(1:HARQ_subband_sum);
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+
+                total_UE.valid_scheduled_flag(i) = 1;
+                total_UE.valid_thr(i) = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_thr;
+
+                total_UE.UE(i).valid_MCS = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_MCS;
+                total_UE.UE(i).TX_buf_pkt_index = total_Macro.Macro(n).UL_HARQ_info(n1).TX_buf_pkt_index;
+                total_UE.UE(i).SINR_gain_from_HARQ = total_Macro.Macro(n).UL_HARQ_info(n1).HARQ_SINR;
+
+                temp_index(end+1) = n1;
+                scheduled_HARQ_UE_index(end+1) = i;
+            <span class="keyword">end</span>
+            <span class="comment">%-----------------delete HARQ information-----------------------</span>
+            total_Macro.Macro(n).UL_HARQ_info(temp_index) = [];
+            total_Macro.Macro(n).UL_HARQ_num = UL_HARQ_num - length(temp_index);
+            <span class="comment">%---------------------------------------------------------------</span>
+            total_UE.used_UL_subframes(scheduled_HARQ_UE_index) = total_UE.used_UL_subframes(scheduled_HARQ_UE_index) + 1;
+        <span class="keyword">end</span>
+        <span class="comment">%--------------second schedule packet in normal buffer------------------</span>
+        UL_pkt_num = total_Macro.Macro(n).UL_buffer.pkt_num;
+        UE_scheduled_flag = zeros(1, total_UE_num);
+        <span class="keyword">if</span> UL_pkt_num&gt;0
+            t1_scheduling_flag = scheduling_flag;
+            t1_UE_index = [];
+            t1_subband_num = [];
+
+            t1_subband_available_flag = subband_available_flag;
+            available_subband_index = find(subband_available_flag==1);
+            max_subband_num = total_UE.max_subband_num;
+            <span class="keyword">for</span> n1=1:UL_pkt_num
+                <span class="keyword">if</span> total_Macro.Macro(n).UL_buffer.pkt_info(n1).finished_flag==0
+                    t1_available_subband_num = sum(t1_subband_available_flag);
+                    t1_available_subband_index = find(t1_subband_available_flag==1);
+
+                    <span class="keyword">if</span> t1_available_subband_num&lt;=0   <span class="comment">% without free subband resource</span>
+                        <span class="keyword">break</span>;
+                    <span class="keyword">end</span>
+                    buf_pkt_size = total_Macro.Macro(n).UL_buffer.pkt_info(n1).buf_pkt_size;
+                    <span class="keyword">if</span> buf_pkt_size&lt;1e-6  <span class="comment">% empty packet</span>
+                        error(<span class="string">'the packet should be finished'</span>);
+                    <span class="keyword">end</span>
+                    i = total_Macro.Macro(n).UL_buffer.pkt_info(n1).allocated_UE_index;
+                    <span class="keyword">if</span> ismember(i, scheduled_HARQ_UE_index)  <span class="comment">% this UE is already scheduled by HARQ</span>
+                        <span class="keyword">continue</span>;
+                    <span class="keyword">end</span>
+
+                    <span class="keyword">if</span> UE_scheduled_flag(i)==0
+                        temp_CQI = mean(total_UE.UE(i).valid_CQI(available_subband_index));
+                        [temp_sp_ef, temp_MC_index] = UL_SINR2MCS(temp_CQI);
+                        selected_MCS = temp_MC_index;
+                        total_UE.UE(i).valid_MCS = selected_MCS;
+                        UE_scheduled_flag(i) = 1;
+                    <span class="keyword">else</span>
+                        selected_MCS = total_UE.UE(i).valid_MCS;
+                    <span class="keyword">end</span>
+
+                    temp_sp_ef = UL_spectrum_efficiency(selected_MCS);
+                    eff_RE_num = Pico_eff_RE_per_subband_U;
+
+                    t2_subband_num = ceil(buf_pkt_size./(temp_sp_ef.*eff_RE_num));
+                    t1_selected_subband_num = min([t2_subband_num, t1_available_subband_num, max_subband_num(i)]);
+                    t1_selected_subband_index = t1_available_subband_index(1:t1_selected_subband_num);
+                    max_subband_num(i) = max_subband_num(i) - t1_selected_subband_num;
+
+                    valid_thr = temp_sp_ef.*eff_RE_num.*t1_selected_subband_num;
+                    remain_pkt_size = buf_pkt_size - valid_thr;
+                    <span class="keyword">if</span> remain_pkt_size&lt;=1e-6
+                        remain_pkt_size = 0;
+                        total_Macro.Macro(n).UL_buffer.pkt_info(n1).finished_flag = 1;
+                    <span class="keyword">end</span>
+                    total_Macro.Macro(n).UL_buffer.pkt_info(n1).buf_pkt_size = remain_pkt_size;
+
+                    total_UE.valid_thr(i) = total_UE.valid_thr(i) + valid_thr;
+                    total_UE.valid_scheduled_flag(i) = 1;
+
+                    total_UE.UE(i).TX_buf_pkt_index(end+1) = n1;
+
+                    t1_subband_available_flag(t1_selected_subband_index) = 0;
+                    t1_scheduling_flag(t1_selected_subband_index) = i;
+
+                    <span class="keyword">if</span> ismember(i, t1_UE_index)
+                        t1_index = find(i==t1_UE_index);
+                        <span class="keyword">if</span> length(t1_index)&gt;1
+                            error(<span class="string">'wrong UL scheduling results'</span>);
+                        <span class="keyword">end</span>
+                        t1_subband_num(t1_index) = t1_subband_num(t1_index) + t1_selected_subband_num;
+                    <span class="keyword">else</span>
+                        t1_UE_index(end+1) = i;
+                        t1_subband_num(end+1) = t1_selected_subband_num;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> sum(t1_subband_num)&gt;length(available_subband_index)
+                error(<span class="string">'wrong UL scheduling'</span>);
+            <span class="keyword">end</span>
+            <span class="keyword">for</span> n2=1:length(t1_UE_index)
+                i = t1_UE_index(n2);
+                selected_subband_num = t1_subband_num(n2);
+                selected_subband_index = available_subband_index(1:selected_subband_num);
+                available_subband_index(1:selected_subband_num) = [];
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+            <span class="keyword">end</span>
+            total_UE.used_UL_subframes(t1_UE_index) = total_UE.used_UL_subframes(t1_UE_index) + 1;
+        <span class="keyword">end</span>
+    <span class="keyword">elseif</span> Macro_Pico_flag == 1  <span class="comment">% Pico scheduling</span>
+        <span class="comment">%---------------first schedule packet in HARQ buffer------------------</span>
+        UL_HARQ_num = total_Pico.Pico(n).UL_HARQ_num;
+        scheduled_HARQ_UE_index = [];
+        <span class="keyword">if</span> UL_HARQ_num&gt;0
+            temp_index = [];
+            <span class="keyword">for</span> n1=1:UL_HARQ_num
+                <span class="keyword">if</span> all(subband_available_flag==0)   <span class="comment">% without free subband resource</span>
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                HARQ_TTI_index = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_TTI_index;
+                <span class="keyword">if</span> (TTI_index-HARQ_TTI_index)&lt;UL_HARQ_delay
+                    <span class="keyword">break</span>;
+                <span class="keyword">end</span>
+                i = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_UE_index;
+                <span class="keyword">if</span> ~isempty(find(scheduling_flag==i))  <span class="comment">% this UE is already scheduled</span>
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                HARQ_subband_index = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_subband_index;
+                HARQ_subband_sum = length(HARQ_subband_index);
+                <span class="keyword">if</span> HARQ_subband_sum&gt;sum(subband_available_flag)
+                    <span class="keyword">continue</span>;
+                <span class="keyword">end</span>
+                available_subband_index = find(subband_available_flag==1);
+                selected_subband_index = available_subband_index(1:HARQ_subband_sum);
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+
+                total_UE.valid_scheduled_flag(i) = 1;
+                total_UE.valid_thr(i) = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_thr;
+
+                total_UE.UE(i).valid_MCS = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_MCS;
+                total_UE.UE(i).TX_buf_pkt_index = total_Pico.Pico(n).UL_HARQ_info(n1).TX_buf_pkt_index;
+                total_UE.UE(i).SINR_gain_from_HARQ = total_Pico.Pico(n).UL_HARQ_info(n1).HARQ_SINR;
+
+                temp_index(end+1) = n1;
+                scheduled_HARQ_UE_index(end+1) = i;
+            <span class="keyword">end</span>
+            <span class="comment">%-----------------delete HARQ information-----------------------</span>
+            total_Pico.Pico(n).UL_HARQ_info(temp_index) = [];
+            total_Pico.Pico(n).UL_HARQ_num = UL_HARQ_num - length(temp_index);
+            <span class="comment">%---------------------------------------------------------------</span>
+            total_UE.used_UL_subframes(scheduled_HARQ_UE_index) = total_UE.used_UL_subframes(scheduled_HARQ_UE_index) + 1;
+        <span class="keyword">end</span>
+        <span class="comment">%--------------second schedule packet in normal buffer------------------</span>
+        UL_pkt_num = total_Pico.Pico(n).UL_buffer.pkt_num;
+        UE_scheduled_flag = zeros(1, total_UE_num);
+        <span class="keyword">if</span> UL_pkt_num&gt;0
+            t1_scheduling_flag = scheduling_flag;
+            t1_UE_index = [];
+            t1_subband_num = [];
+
+            t1_subband_available_flag = subband_available_flag;
+            available_subband_index = find(subband_available_flag==1);
+            max_subband_num = total_UE.max_subband_num;
+            <span class="keyword">for</span> n1=1:UL_pkt_num
+                <span class="keyword">if</span> total_Pico.Pico(n).UL_buffer.pkt_info(n1).finished_flag==0
+                    t1_available_subband_num = sum(t1_subband_available_flag);
+                    t1_available_subband_index = find(t1_subband_available_flag==1);
+
+                    <span class="keyword">if</span> t1_available_subband_num&lt;=0   <span class="comment">% without free subband resource</span>
+                        <span class="keyword">break</span>;
+                    <span class="keyword">end</span>
+                    buf_pkt_size = total_Pico.Pico(n).UL_buffer.pkt_info(n1).buf_pkt_size;
+                    <span class="keyword">if</span> buf_pkt_size&lt;1e-6  <span class="comment">% empty packet</span>
+                        error(<span class="string">'the packet should be finished'</span>);
+                    <span class="keyword">end</span>
+                    i = total_Pico.Pico(n).UL_buffer.pkt_info(n1).allocated_UE_index;
+                    <span class="keyword">if</span> ismember(i, scheduled_HARQ_UE_index)  <span class="comment">% this UE is already scheduled by HARQ</span>
+                        <span class="keyword">continue</span>;
+                    <span class="keyword">end</span>
+
+                    <span class="keyword">if</span> UE_scheduled_flag(i)==0
+                        temp_CQI = mean(total_UE.UE(i).valid_CQI(available_subband_index));
+                        [temp_sp_ef, temp_MC_index] = UL_SINR2MCS(temp_CQI);
+                        selected_MCS = temp_MC_index;
+                        total_UE.UE(i).valid_MCS = selected_MCS;
+                        UE_scheduled_flag(i) = 1;
+                    <span class="keyword">else</span>
+                        selected_MCS = total_UE.UE(i).valid_MCS;
+                    <span class="keyword">end</span>
+
+                    temp_sp_ef = UL_spectrum_efficiency(selected_MCS);
+                    eff_RE_num = Pico_eff_RE_per_subband_U;
+
+                    t2_subband_num = ceil(buf_pkt_size./(temp_sp_ef.*eff_RE_num));
+                    t1_selected_subband_num = min([t2_subband_num, t1_available_subband_num, max_subband_num(i)]);
+                    t1_selected_subband_index = t1_available_subband_index(1:t1_selected_subband_num);
+                    max_subband_num(i) = max_subband_num(i) - t1_selected_subband_num;
+
+                    valid_thr = temp_sp_ef.*eff_RE_num.*t1_selected_subband_num;
+                    remain_pkt_size = buf_pkt_size - valid_thr;
+                    <span class="keyword">if</span> remain_pkt_size&lt;=1e-6
+                        remain_pkt_size = 0;
+                        total_Pico.Pico(n).UL_buffer.pkt_info(n1).finished_flag = 1;
+                    <span class="keyword">end</span>
+                    total_Pico.Pico(n).UL_buffer.pkt_info(n1).buf_pkt_size = remain_pkt_size;
+
+                    total_UE.valid_thr(i) = total_UE.valid_thr(i) + valid_thr;
+                    total_UE.valid_scheduled_flag(i) = 1;
+
+                    total_UE.UE(i).TX_buf_pkt_index(end+1) = n1;
+
+                    t1_subband_available_flag(t1_selected_subband_index) = 0;
+                    t1_scheduling_flag(t1_selected_subband_index) = i;
+
+                    <span class="keyword">if</span> ismember(i, t1_UE_index)
+                        t1_index = find(i==t1_UE_index);
+                        <span class="keyword">if</span> length(t1_index)&gt;1
+                            error(<span class="string">'wrong UL scheduling results'</span>);
+                        <span class="keyword">end</span>
+                        t1_subband_num(t1_index) = t1_subband_num(t1_index) + t1_selected_subband_num;
+                    <span class="keyword">else</span>
+                        t1_UE_index(end+1) = i;
+                        t1_subband_num(end+1) = t1_selected_subband_num;
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> sum(t1_subband_num)&gt;length(available_subband_index)
+                error(<span class="string">'wrong UL scheduling'</span>);
+            <span class="keyword">end</span>
+            <span class="keyword">for</span> n2=1:length(t1_UE_index)
+                i = t1_UE_index(n2);
+                selected_subband_num = t1_subband_num(n2);
+                selected_subband_index = available_subband_index(1:selected_subband_num);
+                available_subband_index(1:selected_subband_num) = [];
+
+                subband_available_flag(selected_subband_index) = 0;
+                scheduling_flag(selected_subband_index) = i;
+                TP_index(selected_subband_index) = -i;
+            <span class="keyword">end</span>
+            total_UE.used_UL_subframes(t1_UE_index) = total_UE.used_UL_subframes(t1_UE_index) + 1;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>   <span class="comment">% end "if TTI_direction~=-1"</span>
+</pre> 
+</section>
+          </div>
+        </div>
+                     <p class="regular">
+                         <font style="font-weight: 400;">"Main" </font>describes the process of mobile communication, from initialization of users and base station to decoding data.</p>
+                    <p class="regular">
+                     <font style="font-weight: 400;">"TDD Reconfig" </font>dynamically distributes time resource to uplink and downlink transport.</p>
+                     <p class="regular">
+                      <font style="font-weight: 400;">"FIFO"</font> shows how to deal with data waiting to transport: schedule HARQ buffer first and then normal buffer.</p>
+                    </div>
+					
+
+					<div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+						<h2>3. Dynamic FDD & TDD</h2>
+                        <h3>3.1  Technical Principle </h3>
+						<p class="regular">
+						Dynamic TDD is to rearrange time resources according to real time need, while Dynamic FDD is to rearrange frequency resources. In traditional occasion, uplink and downlink use symmetrical frequency bands. So lots of uplink frequency band remain free. Dynamic FDD is to use these free uplink bands to transport downlink data.</p>
+                        <p class="regular">
+                        However, Dynamic FDD cannot precisely allocate spectrum resources according to real-time conditions of the uplink and downlink services. That is, the granularity of the distribution is a little bit large. So here comes Dynamic FDD & TDD.</p>
+                  	</div>
+
+                     <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+                        <img class="img-responsive" data-original="images/5G/ flow chart.png">
+                        <div class="side-note">
+                            <p>Flow Chart of Dynamic FDD & TDD</p>
+                        </div>    
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-5 col-md-offset-0">
+                        <p class="regular">
+                        <br/><br/>
+                        Dynamic FDD & TDD rearrange both frequency and time resources accroding to realtime data traffic. First, the system applies Dynamic FDD to distribute frequency band. But due to policy restrictions, the distribution is  coarse. So the system applies Dynamic TDD in the freer band, whether uplink or downlink, in order to use resources more efficiently.<br/><br/></p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-5 col-md-offset-0">
+                        <img class="img-responsive" data-original="images/5G/flexible duplex.png" style="padding-left: 80px;">   
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        
+                        <h3>3.2  Matlab Codes </h3>
+                <div class="content" style="margin-top: 30px;">
+
+
+
+<pre class="codeinput"><span class="keyword">function</span>  [] = FDD_AND_TDD(TTI_index,Macro_eff_RE_per_subband_D, Macro_eff_RE_per_subband_S,<span class="keyword">...</span>
+FDD_reconfig_period,Macro_eff_RE_per_subband_U, total_Macro_num, total_Pico_num, enable_Macro_flag, <span class="keyword">...</span>
+enable_dynamic_FDD,current_Pico_TTI_direction);
+
+<span class="keyword">global</span> total_Macro;
+<span class="keyword">global</span> total_Pico;
+
+FDD_mode_precise = [35 5;30 10;25 15;20 20;15 25;10 30;5 35];<span class="comment">%5MHz flexible band</span>
+DL_UL_ratio_precise = [7;3;1.6667;1;0.6;0.3333;0.14];
+
+TDD_mode = [
+1 0 -1 -1 -1  1 0 -1 -1 -1;
+1 0 -1 -1  1  1 0 -1 -1  1;
+1 0 -1  1  1  1 0 -1  1  1;
+1 0 -1 -1 -1  1 1  1  1  1;
+1 0 -1 -1  1  1 1  1  1  1;
+1 0 -1  1  1  1 1  1  1  1;
+1 0 -1 -1 -1  1 0 -1 -1  1];
+
+DL_UL_ratio = [
+(Macro_eff_RE_per_subband_D.*2+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*6);
+(Macro_eff_RE_per_subband_D.*4+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*4);
+(Macro_eff_RE_per_subband_D.*6+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*2);
+(Macro_eff_RE_per_subband_D.*6+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*3);
+(Macro_eff_RE_per_subband_D.*7+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*2);
+(Macro_eff_RE_per_subband_D.*8+Macro_eff_RE_per_subband_S.*1)./(Macro_eff_RE_per_subband_U.*1);
+(Macro_eff_RE_per_subband_D.*3+Macro_eff_RE_per_subband_S.*2)./(Macro_eff_RE_per_subband_U.*5)];
+
+
+<span class="keyword">if</span> enable_Macro_flag==1
+    <span class="keyword">for</span> Macro_index=1:total_Macro_num
+        total_Macro.Macro(Macro_index).DL_bandwidth =FDD_mode_precise(4,1);
+        total_Macro.Macro(Macro_index).TDD_mode = current_Pico_TTI_direction;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> total_Pico_num&gt;0
+     <span class="comment">%----------------fixed FDD ,algorithm 0---------------</span>
+    <span class="keyword">if</span> enable_dynamic_FDD==0   <span class="comment">%&amp;&amp; fixed FDD</span>
+        <span class="keyword">for</span> Pico_index=1:total_Pico_num
+            <span class="comment">%equal band for uplink and downlink</span>
+            total_Pico.Pico(Pico_index).DL_bandwidth =FDD_mode_precise(4,1);
+            total_Pico.Pico(Pico_index).TDD_mode = current_Pico_TTI_direction;
+        <span class="keyword">end</span>
+     <span class="comment">%----------------dynamic FDD ,algorithm 1 ,without pico grouping,limited with 5MHz---------------</span>
+    <span class="keyword">elseif</span> enable_dynamic_FDD==1
+        <span class="keyword">for</span> Pico_index=1:total_Pico_num
+            DL_traffic = 0;
+            buf_pkt_num = total_Pico.Pico(Pico_index).DL_buffer.pkt_num;
+            <span class="keyword">if</span> buf_pkt_num&gt;0
+                <span class="keyword">for</span> n=1:buf_pkt_num
+                    finished_flag = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).finished_flag;
+                    buf_pkt_size  = total_Pico.Pico(Pico_index).DL_buffer.pkt_info(n).buf_pkt_size;
+                    <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                        error(<span class="string">'wrong DL buffer packet size'</span>);
+                    <span class="keyword">end</span>
+                    DL_traffic = DL_traffic + buf_pkt_size;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            DL_HARQ_num = total_Pico.Pico(Pico_index).DL_HARQ_num;
+            <span class="keyword">if</span> DL_HARQ_num&gt;0
+                <span class="keyword">for</span> n=1:DL_HARQ_num
+                    HARQ_thr = total_Pico.Pico(Pico_index).DL_HARQ_info(n).HARQ_thr;
+                    <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                        error(<span class="string">'wrong DL HARQ packet size'</span>);
+                    <span class="keyword">end</span>
+                    DL_traffic = DL_traffic + HARQ_thr;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            UL_traffic = 0;
+            buf_pkt_num = total_Pico.Pico(Pico_index).UL_buffer.pkt_num;
+            <span class="keyword">if</span> buf_pkt_num&gt;0
+                <span class="keyword">for</span> n=1:buf_pkt_num
+                    finished_flag = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).finished_flag;
+                    buf_pkt_size  = total_Pico.Pico(Pico_index).UL_buffer.pkt_info(n).buf_pkt_size;
+                    <span class="keyword">if</span> (finished_flag==1) &amp;&amp; (buf_pkt_size&gt;0)
+                        error(<span class="string">'wrong UL buffer packet size'</span>);
+                    <span class="keyword">end</span>
+                    UL_traffic = UL_traffic + buf_pkt_size;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            UL_HARQ_num = total_Pico.Pico(Pico_index).UL_HARQ_num;
+            <span class="keyword">if</span> UL_HARQ_num&gt;0
+                <span class="keyword">for</span> n=1:UL_HARQ_num
+                    HARQ_thr = total_Pico.Pico(Pico_index).UL_HARQ_info(n).HARQ_thr;
+                    <span class="keyword">if</span> HARQ_thr&lt;1e-6
+                        error(<span class="string">'wrong UL HARQ packet size'</span>);
+                    <span class="keyword">end</span>
+                    UL_traffic = UL_traffic + HARQ_thr;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+        <span class="keyword">if</span> DL_traffic==0
+             FDD_mode_index = 4;
+        <span class="keyword">elseif</span> UL_traffic==0
+             FDD_mode_index = 4;
+        <span class="keyword">else</span>
+                traffic_DL_UL_ratio = DL_traffic./UL_traffic;
+                diff = abs(DL_UL_ratio_precise - traffic_DL_UL_ratio+1);
+                <span class="keyword">if</span> current_Pico_TTI_direction(Pico_index)~=1
+                diff = abs(DL_UL_ratio - diff);
+                [t2, TDD_mode_index] = min(diff);
+                total_Pico.Pico(Pico_index).TDD_mode = TDD_mode(TDD_mode_index, :);
+                <span class="keyword">end</span>
+           <span class="keyword">end</span>
+            total_Pico.Pico(Pico_index).DL_bandwidth =FDD_mode_precise(FDD_mode_index,1);
+            total_Pico.Pico(Pico_index).TDD_mode = current_Pico_TTI_direction;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre></div></div>
+
+
+
+
+
+                    
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <h2>4. Cell Clustering </h2>
+                        <h3>4.1  Technical Principle </h3>
+                        <p class="regular">
+                        Because adjacent cells may use different frames applying Dynamic TDD, interface happens there when adjacent cells' transport directions are different.</p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+                        <img class="img-responsive" data-original="images/5G/normal.png">
+                        <div class="side-note">
+                            <p>Interface in Fixed TDD</p>
+                        </div>
+                    </div>
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-0">
+                        <img class="img-responsive" data-original="images/5G/normalplus.png">
+                        <div class="side-note">
+                            <p>Interface in Dynamic TDD</p>
+                        </div>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <p class="regular">
+                        Cell Clustering can help reduce interface among adjacent cells since it put adjacent cells in a group and let them use the same frame.</p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-5 col-md-offset-1">
+                        <img class="img-responsive" data-original="images/5G/cellgroup.png">
+                        <div class="side-note">
+                            <p>Cell Clustering</p>
+                        </div>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-4 col-md-4 col-md-offset-0">
+                        <p class="regular">
+                        <br/>I use the sum of "Large-scale Fading" and "Antenna Gain" to measure the distance between two cells. When the sum is small, these two cells belong to the same group.</p>
+                    </div>
+
+                    <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1">
+                        <h3>4.2  Matlab Codes </h3>
+                        <pre class="codeinput" style="margin-top: 30px;"><span class="keyword">function</span>  [pico_group_index] = Pico_grouping(total_Pico_num)
+
+<span class="keyword">global</span> total_Pico;
+
+pico_group_thld = 60;   <span class="comment">% db</span>
+
+pico_group_index = zeros(1, total_Pico_num);
+
+pico_group_index(1) = 1;
+group_num = 1;
+<span class="keyword">for</span> n=2:total_Pico_num
+    t1_eq_PL_to_pico = zeros(1, group_num);
+    <span class="keyword">for</span> m=1:group_num
+        t1_pico_index = find(pico_group_index==m);
+        t2_eq_PL_to_pico = total_Pico.Pico(n).eq_PL_to_Pico(t1_pico_index);
+        t1_eq_PL_to_pico(m) = min(t2_eq_PL_to_pico);
+    <span class="keyword">end</span>
+
+    group_index = find(t1_eq_PL_to_pico&lt;pico_group_thld);
+    <span class="keyword">if</span> ~isempty(group_index)  <span class="comment">% this UE belongs to the old group</span>
+        group_index = sort(group_index, <span class="string">'ascend'</span>);
+        t1_group_index = group_index(1);
+        pico_group_index(n) = t1_group_index;
+
+        t1_num = length(group_index);
+        <span class="keyword">if</span> t1_num&gt;1
+            <span class="keyword">for</span> m=2:t1_num
+                t2_group_index = group_index(m);
+                pico_group_index(pico_group_index==t2_group_index) = t1_group_index;
+
+                t3_group_index = max(pico_group_index);
+                <span class="keyword">if</span> t3_group_index&gt;t2_group_index
+                    pico_group_index(pico_group_index==t3_group_index) = t2_group_index;
+                <span class="keyword">end</span>
+
+                group_num = group_num - 1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">else</span>   <span class="comment">% this UE forms a new group</span>
+        group_num = group_num + 1;
+        pico_group_index(n) = group_num;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre></div>
+
+            <div class="project-real-content col-xs-12 col-sm-12 col-md-9 col-md-offset-1" style="margin-bottom: 40px;">
+                        <h2>5. Conclusion </h2>
+                        <h3>5.1  Dynamic TDD </h3>
+                        <p class="regular">
+                        1. The average cell uplink and downlink throughput increase greatly.</p>
+                        <p class="regular">
+                        2. Compared to the downlink, the uplink throughput decreases more significantly as the packet arrival rate increases.</p>
+                        <h3>5.2  Dynamic FDD & TDD</h3>
+                         <p class="regular">
+                        1. The average cell uplink and downlink throughput are higher than that of dynamic FDD.</p>
+                         <p class="regular">
+                        2. When the traffic is large, the downlink will occupy the resources of the uplink transmission, so that the uplink throughput of the average cell is smaller than the fixed FDD.</p>
+                        <p class="regular">
+                        3. The uplink and downlink throughput of cell edge users reduces significantly .</p>
+                        <h3>5.3  Cell Clustering</h3>
+                         <p class="regular">
+                        1. When the clustering threshold is 80 dB, the uplink throughput is the highest. The purpose of eliminating uplink interference between base stations is achieved.(Power of signal from base stations is larger than that from users)</p>
+                        <p class="regular">
+                        2. The downlink throughput has a large gain when the clustering threshold is 60 dB. This is due to the smaller clustering threshold resulting in a larger number of cell clusters.</p>
+            </div>
+                   
+
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <footer>
+
+            <div id="split-line">
+                    <img id="line-image" src="images/split-line.png">
+            <div>      
+
+            <div class="project-real-content col-xs-12 col-sm-12 col-md-12 col-md-offset-0">
+                <div class = "footer-nav">
+
+                    <div id="project-nav-middle">
+                    <a href="index.html"><img  src="images/home.png" alt="home" height="43" width="50" ></a>
+                    </div>
+                    
+                    <div id="project-nav-left">
+                        <a class="nav-words" href="wallpaper.html">← PREVIOUS</a>
+                    </div>
+
+                    <div id="project-nav-right">
+                         <a class="nav-words" href="im.html">NEXT →</a>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+
+
+
+
+        <a href="#0" class="cd-top">Top</a>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript">
+
+        	function changeFrameHeight(){
+ 		   var ifm= document.getElementById("myiframe"); 
+		    ifm.height=document.documentElement.clientHeight;
+
+			}
+
+			window.onresize=function(){  
+  		   changeFrameHeight();  } 
+
+        //page transitions
+            $(document).ready(function() {
+
+              var myLazyLoad = new LazyLoad({
+                threshold: 0
+              });
+
+              $(".animsition").animsition({
+
+                inClass               :   'fade-in',
+                outClass              :   'fade-out',
+                inDuration            :    1500,
+                outDuration           :    800,
+                linkElement           :   '.animsition-link',
+                // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+                loading               :    true,
+                loadingParentElement  :   'body', //animsition wrapper element
+                loadingClass          :   'animsition-loading',
+                unSupportCss          : [ 'animation-duration',
+                                          '-webkit-animation-duration',
+                                          '-o-animation-duration'
+                                        ],
+                //"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+                //The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+
+                overlay               :   false,
+
+                overlayClass          :   'animsition-overlay-slide',
+                overlayParentElement  :   'body'
+              });
+            });
+
+
+        </script>
+
+    </body>
+</html>
